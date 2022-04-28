@@ -1,8 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { PAGE_ROUTES } from '../page-config'
+import { StudentGrid } from './student-grid'
 
 export const StudentGridPage = () => {
   return (
-    <div><h1>This is the Students page</h1><Link to='/add-student'>Add Student</Link></div>
+    <div>
+      <Link to={PAGE_ROUTES.ADD_STUDENT}>Add Student</Link>
+      <br />
+      <StudentGrid />
+    </div>
   )
 }
