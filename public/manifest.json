@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Read Naturally Student Page",
+  "name": "Grid view of added students + separate page for adding additional students",
   "icons": [
     {
       "src": "favicon.ico",
