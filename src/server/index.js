@@ -21,6 +21,7 @@ app.get('/student-list', (req, res) => {
     if (err) throw err
 
     const formattedResult = rows.map(row => ({
+      id: row.id,
       firstName: row.FIRST_NAME,
       lastName: row.LAST_NAME,
       username: row.USERNAME,
@@ -74,14 +75,11 @@ app.post('/remove-students', (req, res) => {
   const data = req.body
 
   data.forEach(student => {
-    console.log(`deleting ${student.lastName}, ${student.firstName}`)
+    console.log(`deleting ${student.lastName}, ${student.firstName}; id:${student.id}`)
 
     const sql =
       `DELETE FROM STUDENT
-      WHERE FIRST_NAME='${student.firstName}'
-      AND LAST_NAME='${student.lastName}'
-      AND USERNAME='${student.username}'
-      AND SCHOOL_NAME='${student.schoolName}';`
+      WHERE id=${student.id};`
 
     connection.query(sql, (err) => {
       if (err) throw err

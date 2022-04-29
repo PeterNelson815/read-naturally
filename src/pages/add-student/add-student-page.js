@@ -9,6 +9,7 @@ export const AddStudentPage = () => {
     <div>
       <AddStudentForm />
       <br />
-      <Link to={PAGE_ROUTES.STUDENT_GRID}>Go to Students Page</Link></div>
+      <Link to={PAGE_ROUTES.STUDENT_GRID}>Go to Students Page</Link>
+    </div>
   )
 }

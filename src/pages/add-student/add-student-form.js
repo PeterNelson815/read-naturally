@@ -16,7 +16,13 @@ export const AddStudentForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
       };
-      await fetch('http://localhost:3001/add-student', requestOptions)
+      const result = await fetch('http://localhost:3001/add-student', requestOptions)
+      if (result.ok) {
+        // notify the user of success
+        // redirect back to the list page?
+      } else {
+        // notify user of failure
+      }
     }
 
   })
