@@ -46,9 +46,8 @@ app.post('/add-student', (req, res) => {
   connection.connect()
 
   const data = req.body
-  console.log(`received data is ${req.body}`)
 
-  const sql = 
+  const sql =
     `INSERT INTO STUDENT (FIRST_NAME, LAST_NAME, USERNAME, SCHOOL_NAME, IS_LICENSED)
       VALUES ('${data.firstName}', '${data.lastName}', '${data.username}', '${data.schoolName}', '${data.isLicensed ? 1 : 0}');`
 
@@ -57,6 +56,40 @@ app.post('/add-student', (req, res) => {
 
     res.end('Success')
   })
+
+  connection.end()
+})
+
+app.post('/remove-students', (req, res) => {
+  const mysql = require('mysql')
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'very_secure',
+    database: 'student_records'
+  })
+
+  connection.connect()
+
+  const data = req.body
+
+  data.forEach(student => {
+    console.log(`deleting ${student.lastName}, ${student.firstName}`)
+
+    const sql =
+      `DELETE FROM STUDENT
+      WHERE FIRST_NAME='${student.firstName}'
+      AND LAST_NAME='${student.lastName}'
+      AND USERNAME='${student.username}'
+      AND SCHOOL_NAME='${student.schoolName}';`
+
+    connection.query(sql, (err) => {
+      if (err) throw err
+    })
+  })
+
+  connection.end()
+  res.end('debug')
 })
 
 app.listen(PORT, () => {

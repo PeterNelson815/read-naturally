@@ -16,8 +16,7 @@ export const AddStudentForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
       };
-      const result = await fetch('http://localhost:3001/add-student', requestOptions)
-      console.log(`result of post is: ${result}`)
+      await fetch('http://localhost:3001/add-student', requestOptions)
     }
 
   })

@@ -29,21 +29,19 @@ export const StudentGrid = () => {
     { field: 'isLicensed', headerName: 'License', valueFormatter: params => params.value === true ? 'Yes' : 'No' },
   ])
 
-  const onSuppressKeyboardEvent = params => {
+  const onSuppressKeyboardEvent = async params => {
     const isBackspaceOrDeleteKey = (params.event.keyCode === 8) || (params.event.keyCode === 46)
     if (isBackspaceOrDeleteKey) {
 
       const selectedRows = params.api.getSelectedRows()
       params.api.applyTransaction({ remove: selectedRows })
 
-      // TODO - remove rows from database instead of local storage
-      const remainingRows = []
-      params.api.forEachNode(row => {
-        remainingRows.push(row.data)
-      })
-
-      localStorage['localRowData'] = JSON.stringify(remainingRows)
-      return true;
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(selectedRows)
+      };
+      await fetch('http://localhost:3001/remove-students', requestOptions)
     }
   }
 
