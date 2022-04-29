@@ -6,13 +6,9 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 
 export const StudentGrid = () => {
 
-  const [rowData] = useState([
-    { firstName: 'Peter', lastName: 'Nelson', username: 'Longstride', schoolname: 'Maple Grove Senior High', license: 'False' },
-    { firstName: 'And', lastName: 'Three', username: 'Scrafty', schoolname: 'Maple Grove Senior High', license: 'False' },
-    { firstName: 'Then', lastName: 'Alana', username: 'Ferroseed', schoolname: 'Maple Grove Senior High', license: 'False' },
-    { firstName: 'After', lastName: 'Mundi', username: 'Articuno', schoolname: 'Maple Grove Senior High', license: 'False' },
-    { firstName: 'Number', lastName: 'Two', username: 'Panda', schoolname: 'Maple Grove Senior High', license: 'False' }
-  ])
+  const localRowData = JSON.parse(localStorage.getItem('localRowData'))
+
+  const [rowData] = useState(localRowData)
 
   const [columnDefs] = useState([
     { field: 'firstName', checkboxSelection: true },
@@ -27,6 +23,7 @@ export const StudentGrid = () => {
     if (isBackspaceOrDeleteKey) {
       const selectedRows = params.api.getSelectedRows();
       params.api.applyTransaction({ remove: selectedRows });
+      // TODO - remove rows from database
       return true;
     }
   }
