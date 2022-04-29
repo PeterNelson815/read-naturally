@@ -1,12 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
 
-/*
-  const onAddStudent = e => {
-  }
-
-  */
-
 export const AddStudentForm = () => {
   const formik = useFormik({
     initialValues: {
@@ -16,10 +10,14 @@ export const AddStudentForm = () => {
       schoolName: '',
       isLicensed: ''
     },
-    onSubmit: values => {
-      const rowData = JSON.parse(localStorage['localRowData'])
-      rowData.push(values)
-      localStorage['localRowData'] = JSON.stringify(rowData)
+    onSubmit: async values => {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      };
+      const result = await fetch('http://localhost:3001/add-student', requestOptions)
+      console.log(`result of post is: ${result}`)
     }
 
   })
