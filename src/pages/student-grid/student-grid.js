@@ -14,16 +14,24 @@ export const StudentGrid = () => {
     { field: 'firstName', checkboxSelection: true },
     { field: 'lastName' },
     { field: 'username' },
-    { field: 'schoolname' },
-    { field: 'license' },
+    { field: 'schoolName' },
+    { field: 'isLicensed', headerName: 'License' },
   ])
 
   const onSuppressKeyboardEvent = params => {
     const isBackspaceOrDeleteKey = (params.event.keyCode === 8) || (params.event.keyCode === 46)
     if (isBackspaceOrDeleteKey) {
-      const selectedRows = params.api.getSelectedRows();
-      params.api.applyTransaction({ remove: selectedRows });
-      // TODO - remove rows from database
+
+      const selectedRows = params.api.getSelectedRows()
+      params.api.applyTransaction({ remove: selectedRows })
+
+      // TODO - remove rows from database instead of local storage
+      const remainingRows = []
+      params.api.forEachNode(row => {
+        remainingRows.push(row.data)
+      })
+
+      localStorage['localRowData'] = JSON.stringify(remainingRows)
       return true;
     }
   }

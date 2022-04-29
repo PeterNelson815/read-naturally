@@ -1,18 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { PAGE_ROUTES } from '../page-config'
+import { AddStudentForm } from './add-student-form'
 
 export const AddStudentPage = () => {
 
-  const onAddStudent = e => {
-    const rowData = JSON.parse(localStorage['localRowData'])
-    rowData.push({ firstName: 'Lily', lastName: 'Evans', username: 'Doe', schoolname: 'Hogwarts', license: 'No'})
-    localStorage['localRowData'] = JSON.stringify(rowData)
-  }
-
   return (
     <div>
-      <button onClick={onAddStudent}>Add a Student</button>
+      <AddStudentForm />
       <br />
       <Link to={PAGE_ROUTES.STUDENT_GRID}>Go to Students Page</Link></div>
   )
