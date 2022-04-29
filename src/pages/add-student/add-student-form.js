@@ -8,7 +8,7 @@ export const AddStudentForm = () => {
       lastName: '',
       username: '',
       schoolName: '',
-      isLicensed: ''
+      isLicensed: false
     },
     onSubmit: async values => {
       const requestOptions = {

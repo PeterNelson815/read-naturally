@@ -1,21 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AgGridReact } from 'ag-grid-react'
 
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 
 export const StudentGrid = () => {
+  const [rowData, setRowData] = useState()
 
-  const localRowData = JSON.parse(localStorage.getItem('localRowData'))
+  useEffect(() => {
+    const fetchData = async () => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    };
+      let response = await fetch('http://localhost:3001/student-list', requestOptions)
+      const result = await response.json()
+      setRowData(result)
+    }
 
-  const [rowData] = useState(localRowData)
+    fetchData()
+  }, [])
 
   const [columnDefs] = useState([
     { field: 'firstName', checkboxSelection: true },
     { field: 'lastName' },
     { field: 'username' },
     { field: 'schoolName' },
-    { field: 'isLicensed', headerName: 'License' },
+    { field: 'isLicensed', headerName: 'License', valueFormatter: params => params.value === true ? 'Yes' : 'No' },
   ])
 
   const onSuppressKeyboardEvent = params => {
