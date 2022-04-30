@@ -14,7 +14,7 @@ export const StudentGrid = () => {
       const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
-      };
+      }
       let response = await fetch('http://localhost:3001/student-list', requestOptions)
       const result = await response.json()
       setRowData(result)
@@ -41,7 +41,7 @@ export const StudentGrid = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(selectedRows)
-      };
+      }
       const result = await fetch('http://localhost:3001/remove-students', requestOptions)
       if (result.ok) {
         // only update the ag-grid if the delete was successful
@@ -87,7 +87,7 @@ export const StudentGrid = () => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData)
-    };
+    }
     const result = await fetch('http://localhost:3001/update-student', requestOptions)
     if (!result.ok) {
       console.log('failed to update the database, someone should probably do something')

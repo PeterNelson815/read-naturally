@@ -16,7 +16,7 @@ function App() {
         <Route path={PAGE_ROUTES.ADD_STUDENT} element={<AddStudentPage />} />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

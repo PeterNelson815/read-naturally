@@ -6,7 +6,7 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-app.get('/student-list', (req, res) => {
+const getDatabaseConnection = () => {
   const mysql = require('mysql')
   const connection = mysql.createConnection({
     host: 'localhost',
@@ -15,6 +15,11 @@ app.get('/student-list', (req, res) => {
     database: 'student_records'
   })
 
+  return connection
+}
+
+app.get('/student-list', (req, res) => {
+  const connection = getDatabaseConnection()
   connection.connect()
 
   connection.query('SELECT * FROM STUDENT', (err, rows) => {
@@ -36,14 +41,7 @@ app.get('/student-list', (req, res) => {
 })
 
 app.post('/add-student', (req, res) => {
-  const mysql = require('mysql')
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'very_secure',
-    database: 'student_records'
-  })
-
+  const connection = getDatabaseConnection()
   connection.connect()
 
   const data = req.body
@@ -62,14 +60,7 @@ app.post('/add-student', (req, res) => {
 })
 
 app.post('/remove-students', (req, res) => {
-  const mysql = require('mysql')
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'very_secure',
-    database: 'student_records'
-  })
-
+  const connection = getDatabaseConnection()
   connection.connect()
 
   const data = req.body
