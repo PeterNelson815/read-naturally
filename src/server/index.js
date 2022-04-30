@@ -90,6 +90,35 @@ app.post('/remove-students', (req, res) => {
   res.end('debug')
 })
 
+app.put('/update-student', (req, res) => {
+  const mysql = require('mysql')
+  const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'very_secure',
+    database: 'student_records'
+  })
+
+  connection.connect()
+
+  const data = req.body
+  const sql =
+    `UPDATE STUDENT
+     SET FIRST_NAME = '${data.firstName}',
+     LAST_NAME = '${data.lastName}',
+     USERNAME = '${data.username}',
+     SCHOOL_NAME = '${data.schoolName}',
+     IS_LICENSED = ${data.isLicensed ? 1 : 0}
+     WHERE id=${data.id};`
+
+  connection.query(sql, (err) => {
+    if (err) throw err
+  })
+
+  connection.end()
+  res.send('success')
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`)
 })

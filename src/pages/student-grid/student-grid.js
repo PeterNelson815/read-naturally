@@ -6,7 +6,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 
 export const StudentGrid = () => {
   const [rowData, setRowData] = useState()
-  
+
   const gridRef = useRef()
 
   useEffect(() => {
@@ -24,16 +24,16 @@ export const StudentGrid = () => {
   }, [])
 
   const [columnDefs] = useState([
-    { field: 'firstName', sortable: true, filter: 'agTextColumnFilter', checkboxSelection: true },
-    { field: 'lastName', sortable: true, filter: 'agTextColumnFilter' },
-    { field: 'username', sortable: true, filter: 'agTextColumnFilter' },
-    { field: 'schoolName', sortable: true, filter: 'agTextColumnFilter' },
-    { field: 'isLicensed', sortable: true, headerName: 'License', valueFormatter: params => params.value === true ? 'Yes' : 'No' },
+    { field: 'firstName', sortable: true, editable: true, filter: 'agTextColumnFilter', checkboxSelection: true },
+    { field: 'lastName', sortable: true, editable: true, filter: 'agTextColumnFilter' },
+    { field: 'username', sortable: true, editable: true, filter: 'agTextColumnFilter' },
+    { field: 'schoolName', sortable: true, editable: true, filter: 'agTextColumnFilter' },
+    { field: 'isLicensed', sortable: true, editable: true, headerName: 'License', valueFormatter: params => params.value === true ? 'Yes' : 'No' },
   ])
 
   const onSuppressKeyboardEvent = async params => {
-    const isBackspaceOrDeleteKey = (params.event.keyCode === 8) || (params.event.keyCode === 46)
-    if (isBackspaceOrDeleteKey) {
+    const isDeleteKey = params.event.keyCode === 46
+    if (isDeleteKey) {
 
       const selectedRows = params.api.getSelectedRows()
 
@@ -50,6 +50,11 @@ export const StudentGrid = () => {
         // api calls never fail, this is essentially a dead code block
         // (but actually, should have some kind of error notification to user here that the delete failed)
       }
+    }
+
+    const isEnterKey = params.event.keyCode === 13
+    if (isEnterKey) {
+      gridRef.current.api.stopEditing()
     }
   }
 
@@ -74,6 +79,21 @@ export const StudentGrid = () => {
     gridRef.current.api.setFilterModel(JSON.parse(savedFilterModel))
   }
 
+  const onCellEditingStopped = async params => {
+    //there must be a way to pull this data straight from 'params' but I just could not find it
+    const updatedData = params.api.getRowNode(params.rowIndex).data
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedData)
+    };
+    const result = await fetch('http://localhost:3001/update-student', requestOptions)
+    if (!result.ok) {
+      console.log('failed to update the database, someone should probably do something')
+    }
+  }
+
   return (
     <div>
       <button onClick={saveFilter}>Save Filter</button>
@@ -86,6 +106,7 @@ export const StudentGrid = () => {
           columnDefs={columnDefs}
           onSortChanged={onSortChanged}
           onGridReady={onGridReady}
+          onCellEditingStopped={onCellEditingStopped}
           defaultColDef={{
             suppressKeyboardEvent: onSuppressKeyboardEvent
           }}>
