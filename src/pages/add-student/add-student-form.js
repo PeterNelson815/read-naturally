@@ -1,7 +1,13 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import { useFormik } from 'formik'
 
+import { PAGE_ROUTES } from '../page-config'
+
 export const AddStudentForm = () => {
+
+  const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -18,8 +24,8 @@ export const AddStudentForm = () => {
       }
       const result = await fetch('http://localhost:3001/add-student', requestOptions)
       if (result.ok) {
-        // notify the user of success
-        // redirect back to the list page?
+        // notify the user of success? should be some kind of UX feedback here
+        navigate(PAGE_ROUTES.STUDENT_GRID)
       } else {
         // notify user of failure
       }

@@ -1,8 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import { StudentGridPage } from './pages/student-grid/student-grid-page'
 import { AddStudentPage } from './pages/add-student/add-student-page'
