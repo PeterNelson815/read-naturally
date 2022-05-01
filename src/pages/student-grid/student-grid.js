@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
 import { AgGridReact } from 'ag-grid-react'
+import { Button, Container, Card, Row } from 'react-bootstrap'
+
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 
@@ -24,10 +26,8 @@ export const StudentGrid = () => {
   }
 
   return (
-    <div>
-      <button onClick={saveFilter}>Save Filter</button>
-      <button onClick={loadFilter}>Load Filter</button>
-      <div className="ag-theme-alpine" style={{ height: '768px', width: '1024px' }}>
+    <Container>
+      <div className="ag-theme-alpine" style={{ height: '80vh', width: '100%' }}>
         <AgGridReact
           ref={gridRef}
           rowSelection={"multiple"}
@@ -41,6 +41,17 @@ export const StudentGrid = () => {
           }}>
         </AgGridReact>
       </div>
-    </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingTop: '10px'
+        }}
+      >
+        <Button onClick={saveFilter}>Save Filter</Button>
+        <Button onClick={loadFilter}>Load Filter</Button>
+      </div>
+    </Container>
   )
 }
