@@ -20,7 +20,7 @@ export const useStudentGridSetup = () => {
   const [columnDefs] = useState([
     { field: 'firstName', sortable: true, editable: true, filter: 'agTextColumnFilter', checkboxSelection: true },
     { field: 'lastName', sortable: true, editable: true, filter: 'agTextColumnFilter' },
-    { field: 'username', sortable: true, editable: true, filter: 'agTextColumnFilter' },
+    { field: 'username', sortable: true, filter: 'agTextColumnFilter' },
     { field: 'schoolName', sortable: true, editable: true, filter: 'agTextColumnFilter' },
     { field: 'isLicensed', sortable: true, editable: true, headerName: 'License', valueFormatter: params => params.value === true ? 'Yes' : 'No' },
   ])
