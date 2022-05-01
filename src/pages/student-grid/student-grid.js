@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { AgGridReact } from 'ag-grid-react'
-import { Button, Container, Card, Row } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
