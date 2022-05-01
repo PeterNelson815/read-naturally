@@ -50,7 +50,7 @@ app.post('/add-student', (req, res) => {
     `INSERT INTO STUDENT (FIRST_NAME, LAST_NAME, USERNAME, SCHOOL_NAME, IS_LICENSED)
       VALUES ('${data.firstName}', '${data.lastName}', '${data.username}', '${data.schoolName}', '${data.isLicensed ? 1 : 0}');`
 
-  connection.query(sql, (err, rows) => {
+  connection.query(sql, (err) => {
     if (err) throw err
 
     res.end('Success')
