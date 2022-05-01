@@ -5,7 +5,7 @@ import { Container, Card, Col, Row } from 'react-bootstrap'
 import { PAGE_ROUTES } from '../page-config'
 import { AddStudentForm } from './add-student-form'
 
-export const AddStudentPage = () => {
+const AddStudentPage = () => {
 
   return (
     <Container>
@@ -32,3 +32,5 @@ export const AddStudentPage = () => {
     </Container>
   )
 }
+
+export default AddStudentPage

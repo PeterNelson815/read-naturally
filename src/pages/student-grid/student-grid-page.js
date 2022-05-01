@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { PAGE_ROUTES } from '../page-config'
 import { StudentGrid } from './student-grid'
 
-export const StudentGridPage = () => {
+const StudentGridPage = () => {
   return (
     <Container>
       <Card>
@@ -19,10 +19,14 @@ export const StudentGridPage = () => {
             <Col />
           </Row>
         </Card.Header>
-      <Card.Body>
-        <StudentGrid />
-      </Card.Body>
+        <Card.Body>
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <StudentGrid />
+          </React.Suspense>
+        </Card.Body>
       </Card>
     </Container>
   )
 }
+
+export default StudentGridPage
