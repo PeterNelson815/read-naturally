@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ROUTE } from '../../routes'
 
 export const useStudentGridSetup = () => {
   const [rowData, setRowData] = useState()
@@ -9,7 +10,7 @@ export const useStudentGridSetup = () => {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       }
-      let response = await fetch('http://localhost:3001/student-list', requestOptions)
+      let response = await fetch(ROUTE.FETCH_STUDENT_LIST, requestOptions)
       const result = await response.json()
       setRowData(result)
     }

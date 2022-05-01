@@ -1,3 +1,4 @@
+import { ROUTE } from "../../routes"
 
 export const useStudentGridListeners = gridRef => {
 
@@ -12,12 +13,12 @@ export const useStudentGridListeners = gridRef => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(selectedRows)
       }
-      const result = await fetch('http://localhost:3001/remove-students', requestOptions)
+      const result = await fetch(ROUTE.DELETE_STUDENTS, requestOptions)
       if (result.ok) {
         // only update the ag-grid if the delete was successful
         params.api.applyTransaction({ remove: selectedRows })
       } else {
-        // api calls never fail, this is essentially a dead code block
+        // api calls never fail, this is essentially a dead code block /s
         // (but actually, should have some kind of error notification to user here that the delete failed)
       }
     }
@@ -47,7 +48,7 @@ export const useStudentGridListeners = gridRef => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData)
     }
-    const result = await fetch('http://localhost:3001/update-student', requestOptions)
+    const result = await fetch(ROUTE.UPDATE_STUDENT, requestOptions)
     if (!result.ok) {
       console.log('failed to update the database, roll back the last edit')
     }

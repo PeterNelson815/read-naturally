@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 
 import { PAGE_ROUTES } from '../page-config'
+import { ROUTE } from '../../routes'
 
 export const AddStudentForm = () => {
 
@@ -23,7 +24,7 @@ export const AddStudentForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
       }
-      const result = await fetch('http://localhost:3001/add-student', requestOptions)
+      const result = await fetch(ROUTE.ADD_STUDENT, requestOptions)
       if (result.ok) {
         // notify the user of success? should be some kind of UX feedback here
         navigate(PAGE_ROUTES.STUDENT_GRID)
