@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import 'bootstrap/dist/css/bootstrap.css'
 
 import { StudentGridPage } from './pages/student-grid/student-grid-page'
 import { AddStudentPage } from './pages/add-student/add-student-page'

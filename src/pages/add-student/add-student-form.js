@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 import { useFormik } from 'formik'
+import { Form, Row, Col, Button } from 'react-bootstrap'
 
 import { PAGE_ROUTES } from '../page-config'
 
@@ -33,58 +34,79 @@ export const AddStudentForm = () => {
 
   })
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor='firstName'>First Name</label>
-      <input
-        id='firstName'
-        name='firstName'
-        type='text'
-        onChange={formik.handleChange}
-        value={formik.values.firstName}
-      />
-      <br />
+    <Form onSubmit={formik.handleSubmit}>
+      <Row>
+        <Col>
+          <Form.Group className='mb-3'>
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              id='firstName'
+              name='firstName'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.firstName}
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className='mb-3'>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              id='lastName'
+              name='lastName'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.lastName}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group className='mb-3'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              id='username'
+              name='username'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.username}
+            />
+          </Form.Group>
 
-      <label htmlFor='lastName'>Last Name</label>
-      <input
-        id='lastName'
-        name='lastName'
-        type='text'
-        onChange={formik.handleChange}
-        value={formik.values.lastName}
-      />
-      <br />
+        </Col>
+        <Col>
+          <Form.Group className='mb-3'>
+            <Form.Label>School Name</Form.Label>
+            <Form.Control
+              id='schoolName'
+              name='schoolName'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.schoolName}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
 
-      <label htmlFor='username'>Username</label>
-      <input
-        id='username'
-        name='username'
-        type='text'
-        onChange={formik.handleChange}
-        value={formik.values.username}
-      />
-      <br />
+      <Row>
+        <Col>
+          <Form.Group className='mb-3' style={{ display: 'flex'}}>
+            <Form.Label>License?</Form.Label>&nbsp;
+            <Form.Check
+              id='isLicensed'
+              name='isLicensed'
+              type='checkbox'
+              onChange={formik.handleChange}
+              value={formik.values.isLicensed}
+            />
+          </Form.Group>
+        </Col>
 
-      <label htmlFor='schoolName'>School Name</label>
-      <input
-        id='schoolName'
-        name='schoolName'
-        type='text'
-        onChange={formik.handleChange}
-        value={formik.values.schoolName}
-      />
-      <br />
-
-      <label htmlFor='license'>License</label>
-      <input
-        id='isLicensed'
-        name='isLicensed'
-        type='checkbox'
-        onChange={formik.handleChange}
-        value={formik.values.isLicensed}
-      />
-      <br />
-
-      <button type='submit'>Submit</button>
-    </form>
+        <Col style={{ display: 'flex', justifyContent: 'right'}}>
+          <Button type='submit' style={{ width: '180px'}}> Submit</Button>
+        </Col>
+      </Row>
+    </Form >
   )
 }
