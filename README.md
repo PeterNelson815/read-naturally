@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Getting Started with Read Naturally Student List Grid App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). But then I changed the build to use vanilla webpack/babel.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run dev` && `npm run start-server`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm run dev` starts the frontend React app serving to port 8080 (i.e. localhost:8080/student-grid)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`npm run start-server` starts the backend Express service on port 3001. You can verify this is working by opening `http://localhost:3001/student-list` in a web browser.
 
-### `npm test`
+**NOTE: the MySQL database must also be running on your machine to run this. I have this set up as a Windows service. The setup for this goes beyond the scope of this readme, but a vanilla install of MySQL with a database configured as expected in /server/index.js is all that's required**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Student Grid Page
 
-### `npm run build`
+![example screenshot](./readme1.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* DISCLAIMER: I AM NOT A UX DESIGNER AND IT SHOWS. PLEASE SEND HELP.
+* Click on any field in the grid to edit, EXCEPT:
+* Click on a `Username` cell to open a modal showing a photo of the student (hardcoded to a single image for this demo).
+* Click on a column name to sort/filter based on the values in that column.
+* Sorts are persisted across sessions automatically using local storage.
+* Filters can be manually saved/loaded using the buttons below the grid (also in local storage).
+* Delete rows from the grid by selecting a row (checkbox on the left edge of the row) and pressing delete on your keyboard (this really needs some kind of UI hint or additional element).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Add Student Form
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![example screenshot](./readme2.png)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Straightforward form - fill in the fields and press Submit, which redirects back to the Student List Page
+* Several glaring issues remaining here:
+  * ZERO validation on any of the form fields (yikes).
+  * ZERO error handling (i.e. what if the POST to add the student fails?).
+  * If a user enters some values but doesn't submit, and then tries to navigate away, should probably present a confirmation dialog...
+* There should probably be an option to include a photo? Otherwise it's unclear where the photo modal on the grid page would get its data.
